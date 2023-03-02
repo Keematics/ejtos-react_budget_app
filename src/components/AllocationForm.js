@@ -58,7 +58,7 @@ const AllocationForm = (props) => {
                     </select>
                     <span className="eco" style={{ marginLeft: '2rem', marginRight: '8px' }}></span>
                     <div>
-                        <span style={{paddingRight: "5px"}}>£</span>
+                        <span style={{paddingRight: "5px"}}>{currency}</span>
                         <input
                         required='required'
                         type='number'

@@ -3,49 +3,34 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 
 import { AppContext } from '../context/AppContext';
-
-
-// const Currency = (props) => {
-
-//     const setCurrency = () => {
-
-//     }
-
-//     return (
-//         <div>
-//             <select name="Currency" id="Currency" style={{background: "green", padding: "15px", color: 'white', borderRadius: "7px", border: "none"}} onChange={event => setCurrency(event.target.value)}>
-//                 <option value="₹">Currency (£ Pound)</option>
-//                 <option value="$">( Dollar)</option>
-//                 <option value="£">(£ Pound)</option>
-//                 <option value="€">(€ Euro)</option>
-//                 <option value="₹">(₹ India)</option>
-//             </select>
-//         </div>
-//     );
-// };
-
-// export default Currency;
+import "./style.css"
 
 
 function Currency() {
-    const{currency} = useContext(AppContext)
+    const{currency, dispatch} = useContext(AppContext)
 
-    // const [money, setMoney] = React.useState(currency)
-    // const [title, setTitle] = React.useState("£ Pound")
+    const [title, setTitle] = React.useState("£ Pound")
 
     function handle_dropdown(eventKey) {
         setTitle(eventKey)
-        console.log(title)
+    }
+    
+    function changeCurrency(e){
+        const value = e.target.getAttribute("data-id");
+        dispatch({
+            type: "CHG_CURRENCY",
+            payload: value
+        });
     }
     return (
         <>
         <Dropdown onSelect={handle_dropdown}>
-            <Dropdown.Toggle variant="success" size="lg">{title}</Dropdown.Toggle>
-            <Dropdown.Menu variant="success">
-                <Dropdown.Item as="p" eventKey="$">($ Dollar)</Dropdown.Item>
-                <Dropdown.Item as="p" eventKey="£">(£ Pound)</Dropdown.Item>
-                <Dropdown.Item as="p" eventKey="€">(€ Euro)</Dropdown.Item>
-                <Dropdown.Item as="p" eventKey="₹">(₹ India)</Dropdown.Item>
+            <Dropdown.Toggle style={{backgroundColor: "#20c997", padding: "12px"}} size="lg">Currency {title}</Dropdown.Toggle>
+            <Dropdown.Menu style={{backgroundColor: "#20c997", padding: "0"}}>
+                <Dropdown.Item as="p" data-id="$" onClick={changeCurrency} eventKey="$ Dollar">($ Dollar)</Dropdown.Item>
+                <Dropdown.Item as="p" data-id="£" onClick={changeCurrency} eventKey="£ Pound">(£ Pound)</Dropdown.Item>
+                <Dropdown.Item as="p" data-id="€" onClick={changeCurrency} eventKey="€ Euro">(€ Euro)</Dropdown.Item>
+                <Dropdown.Item as="p" data-id="₹" onClick={changeCurrency} eventKey="₹ India">(₹ India)</Dropdown.Item>
             </Dropdown.Menu>
         </Dropdown>
       </>

@@ -1,0 +1,10 @@
+.dropdown-item {
+    margin-bottom: 0;
+    padding: 10px 15px 10px 20px;
+}
+.dropdown-item:hover {
+    background-color: #fff;
+}
+.dropdown-menu {
+    background-color: #20c997;
+}
