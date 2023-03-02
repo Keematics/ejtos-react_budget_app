@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 
 
 import { AppContext } from '../context/AppContext';
@@ -29,13 +28,27 @@ import { AppContext } from '../context/AppContext';
 
 
 function Currency() {
+    const{currency} = useContext(AppContext)
+
+    // const [money, setMoney] = React.useState(currency)
+    // const [title, setTitle] = React.useState("£ Pound")
+
+    function handle_dropdown(eventKey) {
+        setTitle(eventKey)
+        console.log(title)
+    }
     return (
-      <DropdownButton id="dropdown-item-button" title="Dropdown button">
-        <Dropdown.Item as="p">( Dollar)</Dropdown.Item>
-        <Dropdown.Item as="p">(£ Pound)</Dropdown.Item>
-        <Dropdown.Item as="p">(€ Euro)</Dropdown.Item>
-        <Dropdown.Item as="p">(₹ India)</Dropdown.Item>
-      </DropdownButton>
+        <>
+        <Dropdown onSelect={handle_dropdown}>
+            <Dropdown.Toggle variant="success" size="lg">{title}</Dropdown.Toggle>
+            <Dropdown.Menu variant="success">
+                <Dropdown.Item as="p" eventKey="$">($ Dollar)</Dropdown.Item>
+                <Dropdown.Item as="p" eventKey="£">(£ Pound)</Dropdown.Item>
+                <Dropdown.Item as="p" eventKey="€">(€ Euro)</Dropdown.Item>
+                <Dropdown.Item as="p" eventKey="₹">(₹ India)</Dropdown.Item>
+            </Dropdown.Menu>
+        </Dropdown>
+      </>
     );
   }
   
