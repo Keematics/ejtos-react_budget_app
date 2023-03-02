@@ -4,7 +4,7 @@ import React, { createContext, useReducer } from 'react';
 export const AppReducer = (state, action) => {
     let budget = 0;
     switch (action.type) {
-        case 'currency_change':
+        case 'ADD_EXPENSE':
             let total_budget = 0;
             total_budget = state.expenses.reduce(
                 (previousExp, currentExp) => {
@@ -17,7 +17,8 @@ export const AppReducer = (state, action) => {
                 total_budget = 0;
                 state.expenses.map((currentExp)=> {
                     if(currentExp.name === action.payload.name) {
-                        currentExp.cost = action.payload.cost + currentExp.cost;
+                        currentExp.cost = currentExp.cost + action.payload.cost;
+                        budget = state.budget - action.payload.cost;
                     }
                     return currentExp
                 });
